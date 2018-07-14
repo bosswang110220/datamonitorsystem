@@ -1,28 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wxy.data.dao.UserMapper">
-    <resultMap id="user" type="com.wxy.data.entity.User"/>
-    <parameterMap id="user" type="com.wxy.data.entity.User"/>
-    <select id="findUserByUsername" parameterType="String" resultMap="user">
-        SELECT * FROM user
-        WHERE userName=#{userName}
-    </select>
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.wxy.data.dao.UserMapper" >
+        <resultMap id="BaseResultMap" type="com.wxy.data.entity.User" >
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="userName" property="userName" jdbcType="VARCHAR" />
+            <result column="userPassword" property="userPassword" jdbcType="VARCHAR" />
 
+        </resultMap>
 
-    <update id="updateUserByUsername" parameterMap="user">
-        UPDATE USER SET userPassword=#{userPassword} WHERE userName=#{userName}
-    </update>
+        <sql id="Base_Column_List" >
+        id, userName, userPassword
+    </sql>
 
-    <delete id="deleteUserByUsername" parameterType="String">
-        DELETE FROM USER WHERE userName=#{userName}
-    </delete>
+        <select id="getUserList" resultMap="BaseResultMap"  >
+            SELECT
+            <include refid="Base_Column_List" />
+            FROM user
+        </select>
 
-    <!-- 使用alias自定义的parameterType-->
-    <insert id="saveUser" parameterType="user">
-        INSERT INTO USER (userPassword,userName) VALUES (#{userPassword},#{userName})
+        <select id="getUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+            SELECT
+            <include refid="Base_Column_List" />
+            FROM user
+            WHERE id = #{id}
+        </select>
+
+        <insert id="add" parameterType="com.wxy.data.entity.User" >
+        INSERT INTO
+        user
+        (userName, userPassword)
+        VALUES
+        (#{userName}, #{userPassword})
     </insert>
 
-    <select id="getUserList" resultMap="user">
-        SELECT  * FROM USER
-    </select>
-</mapper>
+        <update id="update" parameterType="java.util.Map" >
+        UPDATE
+        user
+        SET
+        userName = #{user.userName},userPassword = #{user.userPassword}
+        WHERE
+        id = #{id}
+    </update>
+
+        <delete id="delete" parameterType="java.lang.Integer" >
+        DELETE FROM
+        user
+        WHERE
+        id = #{id}
+    </delete>
+    </mapper>

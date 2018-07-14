@@ -3,6 +3,8 @@ package com.wxy.data.dao;
 
 import com.wxy.data.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -14,17 +16,19 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-@Mapper
+
+
+@Repository
 public interface UserMapper {
 
-    User findUserByUsername(String username);
+    User getUserById(Integer id);
 
-    void updateUserByUsername(User user);
+    public List<User> getUserList();
 
-    void deleteUserByUsername(String username);
+    public int add(User user);
 
-    void saveUser(User user);
+    public int update(@Param("id") Integer id, @Param("user") User user);
 
-    List<User> getUserList();
+    public int delete(Integer id);
 
 }

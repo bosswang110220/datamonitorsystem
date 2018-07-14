@@ -5,12 +5,15 @@ import com.wxy.data.service.UserService;
 import com.wxy.data.utils.JsonResult;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.*;
+import java.util.logging.LogManager;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,6 +34,8 @@ public class UserController {
      * @param id
      * @return
      */
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Integer", paramType = "path")

@@ -18,7 +18,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  * Description:
  */
 @Configuration
-public class ApiConfig {
+public class SwaggerConfiguration {
 
     @Bean
     public Docket createRestApi() {

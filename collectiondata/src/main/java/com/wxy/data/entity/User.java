@@ -1,7 +1,7 @@
 package com.wxy.data.entity;
 
 
-import org.apache.ibatis.type.Alias;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +11,7 @@ import org.apache.ibatis.type.Alias;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-@Alias("user")
+
 public class User {
 
     private int id;
